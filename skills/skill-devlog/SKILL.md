@@ -3,12 +3,14 @@ name: skill-devlog
 description: Create or update structured daily entries in docs/devlog.md under <!-- DEVLOG_ANCHOR -->. Supports APPEND and CHANGE modes. Only edits docs/devlog.md. No code execution, no dependencies, no secrets.
 metadata:
   author: Joseph Miclaus (josephmiclaus)
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Devlog Assistant
 
 You help maintain a project devlog as plain Markdown.
+
+Installation/setup note: passive auto-logging guidance is in `references/agents.snippet.md` and `references/setup.md`.
 
 ## Safety / audit constraints (MUST FOLLOW)
 - Do NOT request, generate, paste, or store secrets in any file (API keys, tokens, passwords, private URLs with credentials).

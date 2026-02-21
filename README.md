@@ -23,7 +23,22 @@ Run `skill-devlog` once. If `docs/devlog.md` is missing, it creates the file.
 Copy `skills/skill-devlog/references/devlog.template.md` to `docs/devlog.md`.
 
 ### Passive auto-logging
-Merge the **Devlog auto-logging** section from this repo's `AGENTS.md` into the project's existing `AGENTS.md` (do not overwrite).
+Merge the snippet at `skills/skill-devlog/references/agents.snippet.md` into your project's `AGENTS.md` (do not overwrite existing project rules).
+
+If your project does not have `AGENTS.md`, create one and paste the snippet content.
+
+For full post-install guidance, see `skills/skill-devlog/references/setup.md`.
+
+## Installer UX messaging (recommended)
+
+After install, show:
+- `skill-devlog installed.`
+- `To enable passive auto-logging, merge <installed-skill-path>/references/agents.snippet.md into your project AGENTS.md.`
+- `No AGENTS.md found? Create one and paste the snippet.`
+- `This step is optional; core devlog entry creation/update works without it.`
+
+Example installed path:
+- Codex skill folder: `$CODEX_HOME/skills/skill-devlog/references/agents.snippet.md`
 
 ## Files the skill is allowed to edit
 
