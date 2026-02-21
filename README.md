@@ -32,3 +32,7 @@ Merge the **Devlog auto-logging** section from this repo's `AGENTS.md` into the 
 ## Optional attribution marker
 
 If `docs/devlog.md` contains `<!-- SKILL_DEVLOG_ATTRIBUTION=on -->`, the skill may add a **Credits** section to entries.
+
+## License
+
+MIT
