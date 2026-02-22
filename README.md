@@ -11,7 +11,7 @@ Reusable skill package for maintaining a structured development log in `docs/dev
 ## Install
 
 ```bash
-npx skills add <owner>/skill-devlog --skill skill-devlog
+npx skills add josephmiclaus/skill-devlog --skill skill-devlog
 ```
 
 ## Setup
