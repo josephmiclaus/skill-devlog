@@ -1,6 +1,7 @@
 ---
 name: skill-devlog
 description: Create or update structured daily entries in docs/devlog.md under <!-- DEVLOG_ANCHOR -->. Supports APPEND and CHANGE modes. Only edits docs/devlog.md. No code execution, no dependencies, no secrets.
+license: MIT
 metadata:
   author: Joseph Miclaus (josephmiclaus)
   version: 1.1.0
