@@ -4,7 +4,7 @@ description: Create or update structured daily entries in docs/devlog.md under <
 license: MIT
 metadata:
   author: Joseph Miclaus (josephmiclaus)
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # Devlog Assistant
@@ -23,11 +23,31 @@ Installation/setup note: passive auto-logging guidance is in `references/agents.
 1) Target path: `docs/devlog.md` ONLY.
 2) If `docs/devlog.md` is missing, create it with:
    - `# Dev Log`
+   - `<!-- SKILL_DEVLOG_ATTRIBUTION=on -->`
+   - `<!-- Rule: Never paste secrets (API keys/tokens/passwords) into this file. -->`
    - `<!-- DEVLOG_ANCHOR -->`
-3) Insert new entries immediately below the FIRST occurrence of `<!-- DEVLOG_ANCHOR -->`.
-4) Entries are newest-first (most recent date near the top).
-5) Never modify entries for dates other than the target date.
-6) If `<!-- SKILL_DEVLOG_ATTRIBUTION=on -->` is present in `docs/devlog.md`, replace it with a `## Credits` section with the text "Devlog generated using [josephmiclaus/skill-devlog](https://github.com/josephmiclaus/skill-devlog)". If not present, omit Credits.
+3) The file header must keep these three comments in this exact order immediately below `# Dev Log`:
+   - `<!-- SKILL_DEVLOG_ATTRIBUTION=... -->` (preserve any existing value exactly as written)
+   - `<!-- Rule: Never paste secrets (API keys/tokens/passwords) into this file. -->`
+   - `<!-- DEVLOG_ANCHOR -->`
+4) If any required header comment is missing or out of order, restore the header before editing dated entries.
+5) Preserve the existing value of `<!-- SKILL_DEVLOG_ATTRIBUTION=... -->` exactly as written, whether it is `on`, `off`, `yes`, `no`, or any other value. Do not change that value unless the user explicitly asks for the change.
+6) Insert new entries immediately below `<!-- DEVLOG_ANCHOR -->`.
+7) Entries are newest-first (most recent date near the top).
+8) Never modify entries for dates other than the target date.
+9) Do not remove, replace, or rewrite the required header comments during normal devlog updates, except to restore missing comments or correct their order.
+
+## When to update the devlog
+Before editing `docs/devlog.md`, classify the task:
+
+- **Log automatically**: explicit requests to create/update the devlog; passive auto-logging after code/docs/config edits; debugging tied to those edits; tests run to validate those edits; creation of a durable workspace artifact requested by the user.
+- **Do not log**: read-only devlog inspection; "what's next?" or status queries; summarization; search-only work; Q&A; planning; reviews/findings with no file changes; any task where the agent only inspected existing state or answered in chat.
+- **Ask first if ambiguous**: investigations, analysis, or advisory work that might be worth documenting but did not clearly change project state.
+
+Rules:
+- If the task falls under **Do not log**, answer the request without modifying `docs/devlog.md`.
+- A chat response by itself is not a durable artifact for devlog purposes.
+- Explicit user intent to maintain the devlog overrides the default exclusion.
 
 ## Create vs update
 1) Ask for Date (YYYY-MM-DD). If not specified, use today.
@@ -42,15 +62,15 @@ Ask: **APPEND** or **CHANGE** (default APPEND).
 Ask for additions (bullets) and append them to the end of the relevant section(s). Skip anything I leave blank.
 
 Ask sequentially:
-- Additions to **What I did** (0–8 bullets)
-- Additions to **AI-assisted** (optional, 0–8 bullets; only if relevant)
-- Additions to **User-facing change** (0–3 bullets)
-- Additions to **Decisions / Why** (0–3 bullets)
-- Additions to **Problems / Fixes** (0–5 bullets)
-- Additions to **Results** (0–3 bullets)
-- Additions to **Screenshots** (0–5 filenames; only reference them, do not create/edit files)
-- Additions to **Next** (0–5 bullets)
-- Additions to **Links** (0–5; NO secrets)
+- Additions to **What I did**
+- Additions to **AI-assisted** (optional; only for loggable agent work, never for read-only inspection or Q&A)
+- Additions to **User-facing change**
+- Additions to **Decisions / Why**
+- Additions to **Problems / Fixes**
+- Additions to **Results**
+- Additions to **Screenshots** (only reference filenames, do not create/edit files)
+- Additions to **Next**
+- Additions to **Links** (NO secrets)
 
 Rules:
 - Keep bullets as `- ...`.
@@ -76,14 +96,14 @@ Rules:
 
 ## New entry flow (ask sequentially)
 1) Goal (1 sentence)
-2) What I did (3–8 bullets; be concrete: files/functions/endpoints/UI)
-3) AI-assisted (optional, 0–5 bullets; what the agent did based on my prompts; include a 1-line "Prompt:" bullet if helpful)
-4) User-facing change (optional, 0–2 bullets)
-5) Decisions / Why (optional, 0–3 bullets)
-6) Problems / Fixes (optional, 0–5 bullets)
-7) Results (optional, 0–3 bullets; tests/metrics/proof)
-8) Screenshots (optional, 0–5 filenames stored under `docs/assets/devlog/`; only reference them, do not create/edit files)
-9) Next (1–5 bullets)
+2) What I did (be concrete: files/functions/endpoints/UI)
+3) AI-assisted (optional; only include loggable agent work, not read-only inspection/Q&A; include a 1-line "Prompt:" bullet if helpful)
+4) User-facing change (optional)
+5) Decisions / Why (optional)
+6) Problems / Fixes (optional)
+7) Results (optional; tests/metrics/proof)
+8) Screenshots (optional; filenames stored under `docs/assets/devlog/`; only reference them, do not create/edit files)
+9) Next
 10) Links (optional; commits/PRs/issues/URLs; NO secrets)
 
 Then generate ONE entry using the template and insert it under the anchor.
